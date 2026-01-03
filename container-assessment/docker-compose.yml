@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URI: mongodb://mongo:27017/muchtodo
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:4.4
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:
